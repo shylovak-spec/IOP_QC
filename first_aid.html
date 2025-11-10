@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -71,7 +70,7 @@
             text-align: center;
         }
 
-        /* ОНОВЛЕНІ СТИЛІ ДЛЯ КНОПКИ "НАЗАД" */
+        /* СТИЛІ ДЛЯ КНОПКИ "НАЗАД" */
         a {
             color: #fff;
             text-decoration: underline;
@@ -99,11 +98,16 @@
         <h1>Порядок надання домедичної допомоги</h1>
 
         <div id="audio-list-container">
-            </div>
+            <p style="text-align: center;">Завантаження інструкцій...</p>
+        </div>
 
     </div>
 
     <script>
+        // BASE URL вказує на Ваш репозиторій з аудіо-файлами
+        // ПЕРЕВІРТЕ: 'main' чи 'master'
+        const BASE_AUDIO_URL = 'https://raw.githubusercontent.com/shylovak-spec/Audio_Assetss/main/'; 
+
         const firstAidAudios = [
             { name: "Вступ", fileName: "first_aid_vstup" },
             { name: "Зупинка кровообігу", fileName: "first_aid_circulation" },
@@ -117,17 +121,30 @@
         ];
 
         const container = document.getElementById('audio-list-container');
+        
+        // Запобіжник: якщо контейнер не знайдено
+        if (!container) {
+            console.error('Критична помилка: Не знайдено елемент #audio-list-container.');
+            return; 
+        }
 
+        let htmlContent = '';
+
+        // Динамічне створення HTML-елементів з коректним шляхом до аудіо
         firstAidAudios.forEach((item, index) => {
             const itemId = `audio_${index}`;
             const speedId = `speed_${index}`;
+            
+            // Формуємо повні Raw URL-адреси
+            const mp3Src = `${BASE_AUDIO_URL}${item.fileName}.mp3`;
+            const oggSrc = `${BASE_AUDIO_URL}${item.fileName}.ogg`;
 
-            const itemHTML = `
+            htmlContent += `
                 <div class="audio-item">
                     <h2>${index + 1}. ${item.name}</h2>
                     <audio id="${itemId}" controls preload="metadata">
-                        <source src="audio/${item.fileName}.mp3" type="audio/mpeg">
-                        <source src="audio/${item.fileName}.ogg" type="audio/ogg">
+                        <source src="${mp3Src}" type="audio/mpeg">
+                        <source src="${oggSrc}" type="audio/ogg">
                         Ваш браузер не підтримує аудіоформати MP3 чи OGG.
                     </audio>
                     <div class="speed-control">
@@ -140,13 +157,20 @@
                     </div>
                 </div>
             `;
-            container.innerHTML += itemHTML;
         });
 
+        // Вставляємо згенерований HTML-код у контейнер
+        container.innerHTML = htmlContent; 
+
+        // Функція для зміни швидкості відтворення
         function adjustSpeed(audioId, delta) {
             const audio = document.getElementById(audioId);
-            const speedDisplay = document.getElementById(`speed_${audioId.split('_')[1]}`);
+            // Запобіжники в adjustSpeed для надійності
+            if (!audio) return; 
             
+            const speedDisplay = document.getElementById(`speed_${audioId.split('_')[1]}`);
+            if (!speedDisplay) return;
+
             let currentSpeed = Math.round(audio.playbackRate * 100) / 100;
             let newSpeed = currentSpeed + delta;
 
