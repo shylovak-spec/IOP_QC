@@ -6,15 +6,12 @@
     <title>Інструкції з Охорони Праці</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Стилі для чорно-білого оформлення та Roboto */
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
-            padding: 20px 0;
+            padding: 20px 0 120px;
             background-color: #000;
             color: #fff;
-            /* Відступ для прокрутки, щоб фіксований плеєр не закривав контент */
-            padding-bottom: 120px; 
         }
         .container {
             max-width: 800px;
@@ -23,11 +20,9 @@
             padding: 20px;
         }
         h1 {
-            /* Зменшено розмір шрифту для кращої мобільної адаптації */
             font-size: 1.3em; 
             text-align: center;
             text-transform: uppercase;
-            color: #fff;
             margin-bottom: 20px;
         }
         ol {
@@ -52,8 +47,6 @@
             text-decoration: none;
             display: block;
         }
-
-        /* Стилі для адаптивного плеєра */
         #audio-controls-container {
             position: fixed;
             bottom: 0;
@@ -75,9 +68,6 @@
             align-items: center;
             justify-content: flex-end; 
         }
-        .speed-control span:first-child {
-            margin-right: 10px;
-        }
         .speed-control button {
             background-color: #fff;
             color: #000;
@@ -98,7 +88,6 @@
             width: 50px;
             text-align: center;
         }
-        
         .active-instruction {
             background-color: #444;
             font-weight: bold;
@@ -108,27 +97,28 @@
 <body>
 
     <div class="container">
-        <h1>Інструкції з охорони праці на робочому місці для дільниці Long Test</h1>
+        <h1>Інструкції з охорони праці на робочому місці для дільниці Контролю якості</h1>
 
-        <ol class="instructions-list" id="instruction-list">
-            <li data-file="vstup">Вступ</li>
-            <li data-file="iop3">1. ІОП №3 Для присвоєння 1 групи з електробезпеки</li>
-            <li data-file="iop5">2. ІОП №5 При користуванні електропобутовими приладами та офісною оргтехнікою</li>
-            <li data-file="iop13">3. ІОП №13 При роботі з ручними візками</li>
-            <li data-file="iop14">4. ІОП № 14 При виконання вантажно-розвантажувальних робіт</li>
-            <li data-file="iop26">5. ІОП №26 Під час експлуатації, зберігання та транспортуванні балонів</li>
-            <li data-file="iop27">6. ІОП №27 При роботі з ручним немеханізованим інструментом</li>
-            <li data-file="iop31">7. ІОП №31 Для регулювальника РЕА дільниці Long Test</li>
-            <li data-file="iop39">8. ІОП №39 При роботі та безпечному обслуговуванні посудин, що працюють під тиском</li>
-            <li data-file="iop47">9. ІОП № 47 Для користувача ПЕОМ</li>
-
-            <li><a href="first_aid.html">10. Порядок надання домедичної допомоги</a></li>
-        </ol>
+        <ol id="instruction-list">
+    <li data-file="vstup">Вступ</li>
+    <li data-file="iop3">1. ІОП №3 Для присвоєння 1 групи з електробезпеки</li>
+    <li data-file="iop5">2. ІОП №5 При користуванні електропобутовими приладами та офісною оргтехнікою</li>
+    <li data-file="iop8">3. ІОП №8 При роботі з ручним електроінструментом</li>
+    <li data-file="iop11">4. ІОП №11 При роботі з ізопропиловим спиртом</li>
+    <li data-file="iop13">5. ІОП №13 При роботі з ручними візками</li>
+    <li data-file="iop14">6. ІОП №14 При виконанні вантажно-розвантажувальних робіт</li>
+    <li data-file="iop17">7. ІОП №17 Для комплектувальника</li>
+    <li data-file="iop30">8. ІОП №30 Для контролера якості дільниці контролю якості</li>
+    <li data-file="iop41">9. ІОП №41 Для оператора лінії (сортувальника)</li>
+    <li data-file="iop47">10. ІОП №47 Для користувача ПЕОМ</li>
+    <li data-file="iop51">11. ІОП №51 При роботі на лазерній установці з нанесення гравіювань</li>
+    <li data-file="iop54">12. ІОП №54 При роботі з пневматичним інструментом</li>
+    <li><a href="first_aid.html">13. Порядок надання домедичної допомоги</a></li>
+</ol>
     </div>
 
     <div id="audio-controls-container">
         <audio id="audio-player" controls preload="metadata"></audio>
-        
         <div class="speed-control">
             <span>Швидкість:</span>
             <div>
@@ -140,79 +130,73 @@
     </div>
 
     <script>
-        const audioPlayer = document.getElementById('audio-player');
-        const audioContainer = document.getElementById('audio-controls-container');
-        const speedDisplay = document.getElementById('speed-display');
-        const instructionList = document.getElementById('instruction-list');
-        
-        let currentActiveItem = null;
+    const audioPlayer = document.getElementById('audio-player');
+    const audioContainer = document.getElementById('audio-controls-container');
+    const speedDisplay = document.getElementById('speed-display');
+    
+    let currentActiveItem = null;
 
-        document.querySelectorAll('#instruction-list li[data-file]').forEach(item => {
-            item.addEventListener('click', function() {
-                loadAndPlay(this.getAttribute('data-file'), this);
-            });
+    // ✅ ВИПРАВЛЕННЯ: Це тепер правильний шлях до папки 'audio/'
+    const BASE_AUDIO_URL = 'https://raw.githubusercontent.com/shylovak-spec/Audio_Assetss/main/audio/';
+
+    document.querySelectorAll('#instruction-list li[data-file]').forEach(item => {
+        item.addEventListener('click', function() {
+            loadAndPlay(this.getAttribute('data-file'), this);
         });
+    });
 
-        function loadAndPlay(fileName, listItem) {
-            const mp3Src = `audio/${fileName}.mp3`;
-            const oggSrc = `audio/${fileName}.ogg`;
+    function loadAndPlay(fileName, listItem) {
+        // Формування повного Raw URL-адреси
+        const mp3Src = `${BASE_AUDIO_URL}${fileName}.mp3`;
+        const oggSrc = `${BASE_AUDIO_URL}${fileName}.ogg`;
 
-            if (currentActiveItem === listItem && !audioPlayer.paused) {
-                audioPlayer.pause();
+        if (currentActiveItem === listItem && !audioPlayer.paused) {
+            audioPlayer.pause();
+            currentActiveItem.classList.remove('active-instruction');
+            currentActiveItem = null;
+            audioContainer.style.display = 'none';
+            return;
+        }
+
+        if (currentActiveItem) {
+            currentActiveItem.classList.remove('active-instruction');
+            audioPlayer.pause();
+            audioPlayer.currentTime = 0;
+        }
+
+        currentActiveItem = listItem;
+        currentActiveItem.classList.add('active-instruction');
+        audioContainer.style.display = 'block';
+        
+        audioPlayer.innerHTML = `
+            <source src="${mp3Src}" type="audio/mpeg">
+            <source src="${oggSrc}" type="audio/ogg">
+            Ваш браузер не підтримує аудіоформати MP3 чи OGG.
+        `;
+
+        audioPlayer.playbackRate = 1.0;
+        speedDisplay.textContent = '1.00';
+        
+        audioPlayer.load();
+        audioPlayer.play();
+
+        audioPlayer.onended = function() {
+            if (currentActiveItem) {
                 currentActiveItem.classList.remove('active-instruction');
                 currentActiveItem = null;
                 audioContainer.style.display = 'none';
-                return;
             }
+        };
+    }
 
-            if (currentActiveItem) {
-                currentActiveItem.classList.remove('active-instruction');
-                audioPlayer.pause();
-                audioPlayer.currentTime = 0;
-            }
-
-            currentActiveItem = listItem;
-            currentActiveItem.classList.add('active-instruction');
-            audioContainer.style.display = 'block';
-            
-            audioPlayer.innerHTML = '';
-            
-            audioPlayer.innerHTML = `
-                <source src="${mp3Src}" type="audio/mpeg">
-                <source src="${oggSrc}" type="audio/ogg">
-                Ваш браузер не підтримує аудіоформати MP3 чи OGG.
-            `;
-
-            audioPlayer.playbackRate = 1.0;
-            speedDisplay.textContent = '1.00';
-            
-            audioPlayer.load();
-            audioPlayer.play();
-
-            audioPlayer.onended = function() {
-                if (currentActiveItem) {
-                    currentActiveItem.classList.remove('active-instruction');
-                    currentActiveItem = null;
-                    audioContainer.style.display = 'none';
-                }
-            };
-        }
-
-        function adjustSpeed(delta) {
-            let currentSpeed = Math.round(audioPlayer.playbackRate * 100) / 100;
-            let newSpeed = currentSpeed + delta;
-
-            if (newSpeed < 1.0) {
-                newSpeed = 1.0;
-            }
-            if (newSpeed > 2.0) {
-                newSpeed = 2.0;
-            }
-
-            audioPlayer.playbackRate = newSpeed;
-            speedDisplay.textContent = newSpeed.toFixed(2);
-        }
-    </script>
+    function adjustSpeed(delta) {
+        let newSpeed = audioPlayer.playbackRate + delta;
+        if (newSpeed < 1.0) newSpeed = 1.0;
+        if (newSpeed > 2.0) newSpeed = 2.0;
+        audioPlayer.playbackRate = newSpeed;
+        speedDisplay.textContent = newSpeed.toFixed(2);
+    }
+</script>
 
 </body>
 </html>
