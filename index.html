@@ -25,6 +25,34 @@
             text-transform: uppercase;
             margin-bottom: 20px;
         }
+
+        /* Стилі для кнопки тестування */
+        .test-button-container {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #444;
+        }
+        .btn-test {
+            display: inline-flex;
+            align-items: center;
+            background-color: #ffcc00;
+            color: #000;
+            padding: 12px 25px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            font-size: 1.1em;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .btn-test:hover {
+            background-color: #e6b800;
+            transform: scale(1.05);
+        }
+        .btn-test svg {
+            margin-right: 10px;
+        }
+
         ol {
             list-style: none;
             padding: 0;
@@ -42,11 +70,13 @@
         li:last-child {
             border-bottom: none;
         }
-        a {
+        a.instruction-link {
             color: #fff;
             text-decoration: none;
             display: block;
         }
+
+        /* Плеєр та фікс "трьох крапок" */
         #audio-controls-container {
             position: fixed;
             bottom: 0;
@@ -63,6 +93,14 @@
             width: 100%;
             margin-bottom: 10px;
         }
+        /* CSS Фікс для приховування меню завантаження */
+        audio::-webkit-media-controls-enclosure {
+            overflow: hidden;
+        }
+        audio::-webkit-media-controls-panel {
+            width: calc(100% + 30px);
+        }
+
         .speed-control {
             display: flex;
             align-items: center;
@@ -97,28 +135,38 @@
 <body>
 
     <div class="container">
-        <h1>Інструкції з охорони праці на робочому місці для дільниці Контролю якості</h1>
+        <h1>Інструкції з охорони праці <br> дільниця Контролю якості</h1>
+
+        <div class="test-button-container">
+            <a href="test.html" class="btn-test">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 11l3 3L22 4"></path>
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                </svg>
+                ПРОЙТИ ТЕСТУВАННЯ
+            </a>
+        </div>
 
         <ol id="instruction-list">
-    <li data-file="vstup">Вступ</li>
-    <li data-file="iop3"> ІОП №3 Для присвоєння 1 групи з електробезпеки</li>
-    <li data-file="iop5"> ІОП №5 При користуванні електропобутовими приладами та офісною оргтехнікою</li>
-    <li data-file="iop8"> ІОП №8 При роботі з ручним електроінструментом</li>
-    <li data-file="iop11"> ІОП №11 При роботі з ізопропиловим спиртом</li>
-    <li data-file="iop13"> ІОП №13 При роботі з ручними візками</li>
-    <li data-file="iop14"> ІОП №14 При виконанні вантажно-розвантажувальних робіт</li>
-    <li data-file="iop17"> ІОП №17 Для комплектувальника</li>
-    <li data-file="iop30"> ІОП №30 Для контролера якості дільниці контролю якості</li>
-    <li data-file="iop41"> ІОП №41 Для оператора лінії (сортувальника)</li>
-    <li data-file="iop47"> ІОП №47 Для користувача ПЕОМ</li>
-    <li data-file="iop51"> ІОП №51 При роботі на лазерній установці з нанесення гравіювань</li>
-    <li data-file="iop54"> ІОП №54 При роботі з пневматичним інструментом</li>
-    <li><a href="first_aid.html"> Порядок надання домедичної допомоги</a></li>
-</ol>
+            <li data-file="vstup">Вступ</li>
+            <li data-file="iop3"> ІОП №3 Для присвоєння 1 групи з електробезпеки</li>
+            <li data-file="iop5"> ІОП №5 При користуванні електропобутовими приладами та офісною оргтехнікою</li>
+            <li data-file="iop8"> ІОП №8 При роботі з ручним електроінструментом</li>
+            <li data-file="iop11"> ІОП №11 При роботі з ізопропиловим спиртом</li>
+            <li data-file="iop13"> ІОП №13 При роботі з ручними візками</li>
+            <li data-file="iop14"> ІОП №14 При виконанні вантажно-розвантажувальних робіт</li>
+            <li data-file="iop17"> ІОП №17 Для комплектувальника</li>
+            <li data-file="iop30"> ІОП №30 Для контролера якості дільниці контролю якості</li>
+            <li data-file="iop41"> ІОП №41 Для оператора лінії (сортувальника)</li>
+            <li data-file="iop47"> ІОП №47 Для користувача ПЕОМ</li>
+            <li data-file="iop51"> ІОП №51 При роботі на лазерній установці з нанесення гравіювань</li>
+            <li data-file="iop54"> ІОП №54 При роботі з пневматичним інструментом</li>
+            <li><a href="first_aid.html" class="instruction-link"> Порядок надання домедичної допомоги</a></li>
+        </ol>
     </div>
 
     <div id="audio-controls-container">
-        <audio id="audio-player" controls preload="metadata"></audio>
+        <audio id="audio-player" controls controlsList="nodownload noplaybackrate" preload="metadata"></audio>
         <div class="speed-control">
             <span>Швидкість:</span>
             <div>
@@ -136,20 +184,15 @@
     const instructionListItems = document.querySelectorAll('.container li[data-file]');
     
     let currentActiveItem = null;
-    
-    // ✅ ВИПРАВЛЕННЯ: Це тепер правильний шлях до папки 'audio/'
     const BASE_AUDIO_URL = 'https://raw.githubusercontent.com/shylovak-spec/Audio_Assetss/main/audio/';
     
-    // --- 1. Обробник кліку ---
     instructionListItems.forEach(item => {
         item.addEventListener('click', function() {
             loadAndPlay(this.getAttribute('data-file'), this);
         });
     });
 
-    // --- 2. Функція завантаження та відтворення ---
     function loadAndPlay(fileName, listItem) {
-        // ... (Логіка перевірки та зупинки, як була)
         if (currentActiveItem === listItem && !audioPlayer.paused) {
             audioPlayer.pause();
             currentActiveItem.classList.remove('active-instruction');
@@ -184,44 +227,35 @@
         audioPlayer.play();
     }
 
-    // --- 3. Логіка автоматичного перемикання ---
     audioPlayer.onended = function() {
         if (currentActiveItem) {
-            // Зняти активний стан з поточного елемента
             currentActiveItem.classList.remove('active-instruction');
-
-            // Знайти індекс поточного елемента в загальному списку
             const currentIndex = Array.from(instructionListItems).indexOf(currentActiveItem);
-
-            // Перевірити, чи є наступний елемент (не виходимо за межі списку)
             if (currentIndex !== -1 && currentIndex < instructionListItems.length - 1) {
-                // Визначити наступний елемент
                 const nextItem = instructionListItems[currentIndex + 1];
-                
-                // Запустити його відтворення (рекурсивний виклик)
                 loadAndPlay(nextItem.getAttribute('data-file'), nextItem);
-
             } else {
-                // Якщо це був останній елемент, приховати плеєр і скинути стан
                 currentActiveItem = null;
                 audioContainer.style.display = 'none';
             }
         }
     };
 
-    // --- 4. Функція зміни швидкості (винесена глобально) ---
     function adjustSpeed(delta) {
         let newSpeed = audioPlayer.playbackRate + delta;
-        // Обмеження швидкості
+        // Обмеження швидкості до 1.5, як ви просили
         if (newSpeed < 0.75) newSpeed = 0.75;
         if (newSpeed > 1.5) newSpeed = 1.5;
         audioPlayer.playbackRate = newSpeed;
         speedDisplay.textContent = newSpeed.toFixed(2);
     }
     
-    // Щоб функція adjustSpeed була доступна з HTML-кнопок
     window.adjustSpeed = adjustSpeed; 
 
+    // Додатковий захист від завантаження (правою кнопкою)
+    document.addEventListener('contextmenu', function(e) {
+        if (e.target.tagName === 'AUDIO') e.preventDefault();
+    }, false);
 </script>
 
 </body>
