@@ -6,21 +6,97 @@
     <title>Тестування - Охорона Праці</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Roboto', sans-serif; margin: 0; padding: 20px; background-color: #000; color: #fff; }
-        .container { max-width: 800px; margin: 0 auto; border: 2px solid #fff; padding: 20px; }
-        h1 { font-size: 1.5em; text-align: center; text-transform: uppercase; margin-bottom: 30px; border-bottom: 2px solid #fff; padding-bottom: 10px; }
-        .input-group { margin-bottom: 30px; }
-        label.main-label { display: block; margin-bottom: 10px; font-weight: bold; font-size: 1.2em; }
-        input[type="text"] { width: 100%; padding: 12px; background-color: #111; border: 1px solid #fff; color: #fff; font-size: 1.1em; box-sizing: border-box; }
-        .question { margin-bottom: 25px; padding: 15px; border: 1px dashed #444; }
-        .question p { font-size: 1.1em; margin-top: 0; font-weight: bold; }
-        .options label { display: block; font-weight: normal; font-size: 1em; cursor: pointer; padding: 8px; transition: background 0.2s; }
-        .options label:hover { background: #222; }
-        input[type="radio"] { margin-right: 10px; }
-        .btn-submit { display: block; width: 100%; background-color: #ffcc00; color: #000; padding: 15px; border: none; font-weight: bold; font-size: 1.2em; cursor: pointer; text-transform: uppercase; margin-top: 20px; transition: all 0.3s ease; }
-        .btn-submit:hover:not(:disabled) { background-color: #e6b800; }
-        .btn-submit:disabled { background-color: #555 !important; color: #888; cursor: not-allowed; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #ccc; text-decoration: none; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #000;
+            color: #fff;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            border: 2px solid #fff;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 1.5em;
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #fff;
+            padding-bottom: 10px;
+        }
+        .input-group {
+            margin-bottom: 30px;
+        }
+        label.main-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #111;
+            border: 1px solid #fff;
+            color: #fff;
+            font-size: 1.1em;
+            box-sizing: border-box;
+        }
+        .question {
+            margin-bottom: 25px;
+            padding: 15px;
+            border: 1px dashed #444;
+        }
+        .question p {
+            font-size: 1.1em;
+            margin-top: 0;
+            font-weight: bold;
+        }
+        .options label {
+            display: block;
+            font-weight: normal;
+            font-size: 1em;
+            cursor: pointer;
+            padding: 8px;
+            transition: background 0.2s;
+        }
+        .options label:hover {
+            background: #222;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        .btn-submit {
+            display: block;
+            width: 100%;
+            background-color: #ffcc00;
+            color: #000;
+            padding: 15px;
+            border: none;
+            font-weight: bold;
+            font-size: 1.2em;
+            cursor: pointer;
+            text-transform: uppercase;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        .btn-submit:hover:not(:disabled) {
+            background-color: #e6b800;
+        }
+        .btn-submit:disabled {
+            background-color: #555 !important;
+            color: #888;
+            cursor: not-allowed;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #ccc;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -42,27 +118,108 @@
 </div>
 
 <script>
+    // 1. Повний список питань (20 штук)
     const allQuestions = [
-        { q: "Яка перша дія при виявленні постраждалого без свідомості?", options: ["Дати воду", "Перевірити наявність дихання", "Залишити в зручному положенні"], correct: 1 },
-        { q: "Яка головна вимога безпеки при роботі з ізопропіловим спиртом?", options: ["Підігріти рідину перед використанням", "Працювати у добре вентильованому приміщенні подалі від вогню", "Використовувати спирт у закритих приміщеннях"], correct: 1 },
-        { q: "Яка гранична норма піднімання вантажу при чергуванні з іншою роботою встановлена для жінок (понад 18 років)?", options: ["15 кг", "10 кг", "20 кг"], correct: 1 },
-        { q: "Що необхідно зробити при сильній зовнішній кровотечі?", options: ["Промити рану водою", "Оформити Near Miss", "Накласти тиснучу повʼязку або джгут"], correct: 2 },
-        { q: "У якому випадку НЕ можна переміщати постраждалого?", options: ["При переломі ноги", "При запамороченні", "При підозрі на пошкодження хребта"], correct: 2 },
-        { q: "Що необхідно зробити при опіку?", options: ["Накласти повʼязку", "Змастити маслом чи кремом", "Охолодити уражене місце"], correct: 2 },
-        { q: "У якому положенні слід залишити постраждалого без свідомості, але з диханням?", options: ["Лежачи на спині", "У стабільному боковому положені", "Посадити у зручне положення"], correct: 1 },
-        { q: "Як правильно виходити із зони крокової напруги?", options: ["Швидко вибігти", "Не виходити, чекати допомогу", "Короткими кроками, не відриваючи ногу від ноги"], correct: 2 },
-        { q: "Як звільнити потерпілого (до 1 кВ), якщо струм не вимкнути?", options: ["Відтягнути за сухий одяг", "Тягнути за кінцівку", "Перерубати дріт металевим ломом"], correct: 0 },
-        { q: "Що входить до поняття «Робоче місце» оператора?", options: ["Монітор і клавіатура", "Сукупність устаткування і виробниче середовище", "Принтер і сканер"], correct: 1 },
-        { q: "Який психофізіологічний фактор найбільше впливає на оператора?", options: ["Підвищений шум", "Напруга зору та уваги", "Хімічне отруєння"], correct: 1 },
-        { q: "Коли проводиться повторний інструктаж для сортувальника?", options: ["Раз на рік", "Раз на пів року", "Раз на три місяці"], correct: 2 },
-        { q: "Перша дія при виникненні аварійної ситуації?", options: ["Негайно зупинити лінію і повідомити керівника", "Самостійно усунути поломку", "Повідомити керівнику і продовжити працювати"], correct: 0 },
-        { q: "Що заборонено гасити водою при пожежі?", options: ["Документи", "Девайси", "Обладнання під напругою"], correct: 2 },
-        { q: "Перша дія при отриманні навіть незначної травми?", options: ["Піти додому", "Повідомити керівника", "Написати Near Miss"], correct: 1 },
-        { q: "З якого віку допускаються особи до вантажних робіт?", options: ["з 16", "з 18", "з 21"], correct: 1 },
-        { q: "Вимоги до підлоги по якій переміщують вантажі?", options: ["Чітко позначена стрічкою", "Мати спеціальне покриття", "Рівна, без вибоїн, вільна від сторонніх предметів"], correct: 2 },
-        { q: "Який фактор є небезпечним при роботі з візком?", options: ["Рух візка по інерції", "Триматись за ручку візка", "Перевозити вантажі на візку"], correct: 0 },
-        { q: "Де фіксуються проведені інструктажі?", options: ["На навчальній платформі", "В журналі", "Ніде"], correct: 1 },
-        { q: "Яка максимально допустима вага вантажу при переміщені протягом робочої зміни чоловікам?", options: ["До 15 кг", "До 30 кг", "До 50 кг"], correct: 1 }
+        {
+            q: "Яка перша дія при виявленні постраждалого без свідомості?",
+            options: ["Дати воду", "Перевірити наявність дихання", "Залишити в зручному положенні"],
+            correct: 1
+        },
+        {
+            q: "Яка головна вимога безпеки при роботі з ізопропіловим спиртом?",
+            options: ["Підігріти рідину перед використанням", "Працювати у добре вентильованому приміщенні подалі від вогню", "Використовувати спирт у закритих приміщеннях"],
+            correct: 1
+        },
+        {
+            q: "Яка гранична норма піднімання вантажу при чергуванні з іншою роботою встановлена для жінок (понад 18 років)?",
+            options: ["15 кг", "10 кг", "20 кг"],
+            correct: 1
+        },
+        {
+            q: "Що необхідно зробити при сильній зовнішній кровотечі?",
+            options: ["Промити рану водою", "Оформити Near Miss", "Накласти тиснучу повʼязку або джгут"],
+            correct: 2
+        },
+        {
+            q: "У якому випадку НЕ можна переміщати постраждалого?",
+            options: ["При переломі ноги", "При запамороченні", "При підозрі на пошкодження хребта"],
+            correct: 2
+        },
+        {
+            q: "Що необхідно зробити при опіку?",
+            options: ["Накласти повʼязку", "Змастити маслом чи кремом", "Охолодити уражене місце"],
+            correct: 2
+        },
+        {
+            q: "У якому положенні слід залишити постраждалого без свідомості, але з диханням?",
+            options: ["Лежачи на спині", "У стабільному боковому положені", "Посадити у зручне положення"],
+            correct: 1
+        },
+        {
+            q: "Як правильно виходити із зони крокової напруги?",
+            options: ["Швидко вибігти", "Не виходити, чекати допомогу", "Короткими кроками, не відриваючи ногу від ноги"],
+            correct: 2
+        },
+        {
+            q: "Як звільнити потерпілого (до 1 кВ), якщо струм не вимкнути?",
+            options: ["Відтягнути за сухий одяг", "Тягнути за кінцівку", "Перерубати дріт металевим ломом"],
+            correct: 0
+        },
+        {
+            q: "Що входить до поняття «Робоче місце» оператора?",
+            options: ["Монітор і клавіатура", "Сукупність устаткування і виробниче середовище", "Принтер і сканер"],
+            correct: 1
+        },
+        {
+            q: "Який психофізіологічний фактор найбільше впливає на оператора?",
+            options: ["Підвищений шум", "Напруга зору та уваги", "Хімічне отруєння"],
+            correct: 1
+        },
+        {
+            q: "Коли проводиться повторний інструктаж для сортувальника?",
+            options: ["Раз на рік", "Раз на пів року", "Раз на три місяці"],
+            correct: 2
+        },
+        {
+            q: "Перша дія при виникненні аварійної ситуації?",
+            options: ["Негайно зупинити лінію і повідомити керівника", "Самостійно усунути поломку", "Повідомити керівнику і продовжити працювати"],
+            correct: 0
+        },
+        {
+            q: "Що заборонено гасити водою при пожежі?",
+            options: ["Документи", "Девайси", "Обладнання під напругою"],
+            correct: 2
+        },
+        {
+            q: "Перша дія при отриманні навіть незначної травми?",
+            options: ["Піти додому", "Повідомити керівника", "Написати Near Miss"],
+            correct: 1
+        },
+        {
+            q: "З якого віку допускаються особи до вантажних робіт?",
+            options: ["з 16", "з 18", "з 21"],
+            correct: 1
+        },
+        {
+            q: "Вимоги до підлоги по якій переміщують вантажі?",
+            options: ["Чітко позначена стрічкою", "Мати спеціальне покриття", "Рівна, без вибоїн, вільна від сторонніх предметів"],
+            correct: 2
+        },
+        {
+            q: "Який фактор є небезпечним при роботі з візком?",
+            options: ["Рух візка по інерції", "Триматись за ручку візка", "Перевозити вантажі на візку"],
+            correct: 0
+        },
+        {
+            q: "Де фіксуються проведені інструктажі?",
+            options: ["На навчальній платформі", "В журналі", "Ніде"],
+            correct: 1
+        },
+        {
+            q: "Яка максимально допустима вага вантажу при переміщені протягом робочої зміни чоловікам?",
+            options: ["До 15 кг", "До 30 кг", "До 50 кг"],
+            correct: 1
+        }
     ];
 
     function getRandomQuestions(arr, n) {
@@ -73,10 +230,10 @@
     const selectedQuestions = getRandomQuestions(allQuestions, 5);
     const container = document.getElementById('questions-container');
 
-    // Генерація питань
     selectedQuestions.forEach((item, index) => {
         const questionDiv = document.createElement('div');
         questionDiv.className = 'question';
+        
         let optionsHTML = '';
         item.options.forEach((opt, optIndex) => {
             optionsHTML += `
@@ -86,25 +243,27 @@
                 </label>
             `;
         });
-        questionDiv.innerHTML = `<p>${index + 1}. ${item.q}</p><div class="options">${optionsHTML}</div>`;
+
+        questionDiv.innerHTML = `
+            <p>${index + 1}. ${item.q}</p>
+            <div class="options">${optionsHTML}</div>
+        `;
         container.appendChild(questionDiv);
     });
 
-    // ОДИН обробник події submit
     document.getElementById('quiz-form').addEventListener('submit', function(e) {
         e.preventDefault();
 
         const submitBtn = document.getElementById('submit-btn');
-        const surname = document.getElementById('surname').value.trim();
+        const surname = document.getElementById('surname').value;
         
         submitBtn.disabled = true;
         submitBtn.innerText = "ВІДПРАВКА...";
 
-        // Підрахунок балів за індексами
         let score = 0;
         selectedQuestions.forEach((item, index) => {
-            const selected = document.querySelector(`input[name="q${index}"]:checked`);
-            if (selected && parseInt(selected.value) === item.correct) {
+            const selectedAnswer = document.querySelector(`input[name="q${index}"]:checked`).value;
+            if (parseInt(selectedAnswer) === item.correct) {
                 score++;
             }
         });
@@ -112,7 +271,6 @@
         const percentage = Math.round((score / selectedQuestions.length) * 100);
         const data = { surname: surname, percentage: percentage };
 
-        // ВАШЕ ПОСИЛАННЯ (Контроль якості)
         const scriptURL = 'https://script.google.com/macros/s/AKfycbyS3idw3z3YxYUql62xhQQll-hcXcICkU9JM4hSHP-Dgl0eixzzNijbe_mKgqaddEgN/exec';
 
         fetch(scriptURL, {
@@ -126,7 +284,7 @@
             submitBtn.style.backgroundColor = "#28a745"; 
             
             setTimeout(() => {
-                alert(`Дякуємо, ${surname}! Ваш результат: ${percentage}%. Дані збережено.`);
+                alert(`Дякуємо! Ваш результат: ${percentage}%. Дані збережено.`);
                 window.location.href = 'index.html';
             }, 500);
         })
