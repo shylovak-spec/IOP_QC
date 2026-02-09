@@ -26,7 +26,7 @@
             margin-bottom: 20px;
         }
 
-        /* Стилі для кнопки тестування */
+        /* Стилі для нової кнопки тестування */
         .test-button-container {
             text-align: center;
             margin-bottom: 20px;
@@ -36,7 +36,7 @@
         .btn-test {
             display: inline-flex;
             align-items: center;
-            background-color: #ffcc00;
+            background-color: #ffcc00; /* Яскравий колір для уваги */
             color: #000;
             padding: 12px 25px;
             text-decoration: none;
@@ -75,8 +75,6 @@
             text-decoration: none;
             display: block;
         }
-
-        /* Плеєр та фікс "трьох крапок" */
         #audio-controls-container {
             position: fixed;
             bottom: 0;
@@ -93,14 +91,6 @@
             width: 100%;
             margin-bottom: 10px;
         }
-        /* CSS Фікс для приховування меню завантаження */
-        audio::-webkit-media-controls-enclosure {
-            overflow: hidden;
-        }
-        audio::-webkit-media-controls-panel {
-            width: calc(100% + 30px);
-        }
-
         .speed-control {
             display: flex;
             align-items: center;
@@ -165,7 +155,7 @@
     </div>
 
     <div id="audio-controls-container">
-        <audio id="audio-player" controls controlsList="nodownload noplaybackrate" preload="metadata"></audio>
+        <audio id="audio-player" controls preload="metadata"></audio>
         <div class="speed-control">
             <span>Швидкість:</span>
             <div>
@@ -183,6 +173,7 @@
     const instructionListItems = document.querySelectorAll('.container li[data-file]');
     
     let currentActiveItem = null;
+    
     const BASE_AUDIO_URL = 'https://raw.githubusercontent.com/shylovak-spec/Audio_Assetss/main/audio/';
     
     instructionListItems.forEach(item => {
@@ -242,7 +233,6 @@
 
     function adjustSpeed(delta) {
         let newSpeed = audioPlayer.playbackRate + delta;
-        // Обмеження швидкості до 1.5, як ви просили
         if (newSpeed < 0.75) newSpeed = 0.75;
         if (newSpeed > 1.5) newSpeed = 1.5;
         audioPlayer.playbackRate = newSpeed;
@@ -250,11 +240,6 @@
     }
     
     window.adjustSpeed = adjustSpeed; 
-
-    // Додатковий захист від завантаження (правою кнопкою)
-    document.addEventListener('contextmenu', function(e) {
-        if (e.target.tagName === 'AUDIO') e.preventDefault();
-    }, false);
 </script>
 
 </body>
